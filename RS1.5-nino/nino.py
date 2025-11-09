@@ -36,40 +36,7 @@ def validiraj_broj_telefona(broj: str):
     }
     digits = ''.join(ch for ch in broj if ch.isdigit())
     national = digits
-    if digits.startswith('00385'):
-        national = '0' + digits[5:]
-    elif digits.startswith('385'):
+    print(validiraj_broj_telefona('+385917217633'))
+    print(validiraj_broj_telefona('0917217633'))
+    print(validiraj_broj_telefona('0800123456'))
         national = '0' + digits[3:]
-    elif digits.startswith('0'):
-        national = digits
-    else:
-        national = digits
-    prefixes = sorted(mapa.keys(), key=lambda x: -len(x))
-    match = None
-    for p in prefixes:
-        if national.startswith(p):
-            match = p
-            break
-    if not match:
-        return {'validan': False, 'pozivni_broj': None, 'broj_ostatak': national}
-    ostatak = national[len(match):]
-    vrsta, mjesto, operater = mapa[match]
-    if vrsta == 'posebne usluge':
-        if len(ostatak) == 6:
-            return {'pozivni_broj': match, 'broj_ostatak': ostatak, 'vrsta': vrsta, 'mjesto': None, 'operater': None, 'validan': True}
-        else:
-            return {'validan': False, 'pozivni_broj': match, 'broj_ostatak': ostatak}
-    if vrsta == 'mobilna mreža':
-        if len(ostatak) in (6, 7):
-            return {'pozivni_broj': match, 'broj_ostatak': ostatak, 'vrsta': vrsta, 'mjesto': None, 'operater': operater, 'validan': True}
-        else:
-            return {'validan': False, 'pozivni_broj': match, 'broj_ostatak': ostatak}
-    if vrsta == 'fiksna mreža':
-        if len(ostatak) in (6, 7):
-            return {'pozivni_broj': match, 'broj_ostatak': ostatak, 'vrsta': vrsta, 'mjesto': mjesto, 'operater': None, 'validan': True}
-        else:
-            return {'validan': False, 'pozivni_broj': match, 'broj_ostatak': ostatak}
-
-print(validiraj_broj_telefona('+385917217633'))
-print(validiraj_broj_telefona('0917217633'))
-print(validiraj_broj_telefona('0800123456'))

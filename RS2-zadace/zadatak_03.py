@@ -30,3 +30,5 @@ zbrojeni_bodovi = [{student["prezime"]: sum(student["bodovi"])} for student in s
 print(zbrojeni_bodovi)
 
 #6
+faktorijeli = {n: [math.factorial(i) for i in range(1, n+1)] for n in range(1, 11)}
+print(faktorijeli)
